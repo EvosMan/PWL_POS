@@ -9,19 +9,13 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
-        $data=[
-            'level_id'=>2,
-            'username'=> 'manager_tiga',
-            'nama'=> 'Manager 3',
-            'password'=> Hash::make('12345')
-        ];
-        UserModel::create($data);
-
-        $user = UserModel::all();
-        return view ('user', ['data' => $user]);
+        $user = UserModel::where('level_id', '>=', 1)->firstOr(function(){
+            abort(404);
+        });
+        return view('user', ['data' => $user]);
     }
 }
-// $data = [
+        // $data = [
         //     'username'=> 'customer-1',
         //     'nama'=>'Pelanggan',
         //     'password'=> Hash::make('12345'),
@@ -33,3 +27,14 @@ class UserController extends Controller
         //coba akses model UserModel
         // $user = UserModel::all(); //ambil semua data dari tabel m_user
         // return view('user', ['data' => $user]);
+
+        //$data=[
+        //     'level_id'=>2,
+        //     'username'=> 'manager_tiga',
+        //     'nama'=> 'Manager 3',
+        //     'password'=> Hash::make('12345')
+        // ];
+        // UserModel::create($data);
+
+        // $user = UserModel::all();
+        // return view ('user', ['data' => $user]);
