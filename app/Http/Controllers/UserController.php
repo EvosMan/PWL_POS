@@ -9,26 +9,28 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
-        $user = UserModel::create(
-            [
-                'username' => 'manager11',
-                'nama' => 'Manager11',
-                'password'=> Hash::make('12345'),
-                'level_id'=>2
-
-            ]);
-        $user->username = 'manager12';
-        $user->nama = 'Manager12';
-
-        $user->save();
-
-        $user->wasChanged();
-        $user->wasChanged('username');
-        $user->wasChanged(['username', 'level_id']);
-        $user->wasChanged('nama');
-        dd($user->wasChanged(['nama', 'username']));
+        $user = UserModel::all();
+        return view ('user', ['data' => $user]);
 
     }
+
+    public function tambah()
+        {
+            return view ('user_tambah');
+        }
+
+    public function tambah_simpan(Request $request)
+    {
+        UserModel::create([
+            'username' => $request->username,
+            'nama' => $request->nama,
+            'password' => Hash::make('$request->password'),
+            'level_id' => $request->level_id
+        ]);
+
+        return redirect('/user');
+    }
+    
 }
         // $data = [
         //     'username'=> 'customer-1',
@@ -71,3 +73,22 @@ class UserController extends Controller
         // $user->isDirty();
         // $user->isClean();
         // return dd($user->isDirty());
+
+        // $user = UserModel::create(
+        //     [
+        //         'username' => 'manager11',
+        //         'nama' => 'Manager11',
+        //         'password'=> Hash::make('12345'),
+        //         'level_id'=>2
+
+        //     ]);
+        // $user->username = 'manager12';
+        // $user->nama = 'Manager12';
+
+        // $user->save();
+
+        // $user->wasChanged();
+        // $user->wasChanged('username');
+        // $user->wasChanged(['username', 'level_id']);
+        // $user->wasChanged('nama');
+        // dd($user->wasChanged(['nama', 'username']));
