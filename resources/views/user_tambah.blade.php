@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Form Tambah Data User</h1>
-    <form action="/user/tambah_simpan" method="post"></form>
+    <form  method="POST" action="{{url('user/tambah_simpan')}}">
 
     {{csrf_field()}}
 
@@ -25,6 +25,6 @@
     <br><br>
     <input type="submit" class="" value="Simpan">
 
-
+    </form>
 </body>
 </html>
