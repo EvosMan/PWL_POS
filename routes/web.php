@@ -19,17 +19,26 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('asli');
 });
 
 Route::get('/level', [LevelController::class, 'index']);
+
+Route::post('/level', [LevelController::class, 'store']);
+
+
 
 Route::post('/kategori', [KategoriController::class, 'store']);
 
 Route::get('/kategori', [KategoriController::class, 'index']);
 
+Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit']);
 
 Route::get('/kategori/create/', [KategoriController::class, 'create']);
+
+Route::put('/kategori/update/{id}', [KategoriController::class, 'edit_simpan']);
+
+Route::delete('/kategori/delete/{id}', [KategoriController::class, 'delete']);
 
 Route::get('/user', [UserController::class, 'index']);
 

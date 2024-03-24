@@ -322,7 +322,13 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
+        [
+
         ['header' => 'account_settings'],
+        'text' => 'kategori',
+        'url' => 'kategori',
+        'icon' => 'far fa-fw fa-file',
+    ],
         [
             'text' => 'profile',
             'url' => 'admin/settings',
@@ -371,6 +377,15 @@ return [
                 ],
             ],
         ],
+
+        ['header' => 'Form'],
+        [
+            'text' => 'Form Kategori',
+
+            'url' => '/kategori/create',
+        ],
+
+
         ['header' => 'labels'],
         [
             'text' => 'important',
