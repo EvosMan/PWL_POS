@@ -4,6 +4,7 @@ use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WelcomeController;
 
 
 
@@ -17,10 +18,20 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', [WelcomeController::class, 'index']);
 
-Route::get('/', function () {
-    return view('asli');
-});
+Route::group(['prefix' => 'user'])
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get('/level', [LevelController::class, 'index']);
 
