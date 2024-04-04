@@ -61,8 +61,18 @@ class UserController extends Controller
         $request->validate([
             'username'=> 'required|string|min:3|unique:m_user,username',
             'nama'    => 'required|string|max:100',
+            'passwod' => 'required|min:5',
+            'level_id'=> 'required|integer'
+        ]);
 
-        ])
+        UserModel::create{[
+            'username' => $request->username,
+            'nama'     => $request->nama,
+            'password' => bcrypt($request->password),
+            'level_id' => $request->level_id
+        ]};
+        
+        return redirect('/user')-> with ('success', 'Data user berhasil disimpan');
     }
 
     public function show()

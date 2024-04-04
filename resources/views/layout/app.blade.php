@@ -45,7 +45,7 @@
 {{-- Add common CSS customizations --}}
 @push('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
-    <style type="text/css">
+    <!-- <style type="text/css">
         {{-- You can add AdminLTE customizations here --}}
         /*
              .card-header {
@@ -55,5 +55,5 @@
              font-weight: 600;
              }
              */
-    </style>
+    </style> -->
 @endpush
