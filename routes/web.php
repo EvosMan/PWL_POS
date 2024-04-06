@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
-
+use App\Http\Controllers\StokController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PenjualanController;
 use App\Models\BarangModel;
 
 /*
@@ -20,6 +21,17 @@ use App\Models\BarangModel;
 |
 */
 Route::get('/', [WelcomeController::class, 'index']);
+
+Route::group(['prefix' => 'penjualan'], function () {
+    Route::get('/', [PenjualanController::class, 'index']);
+    Route::post('/list', [PenjualanController::class, 'list']);
+    Route::get('/create', [PenjualanController::class, 'create']);
+    Route::post('/', [PenjualanController::class, 'store']);
+    Route::get('/{id}', [PenjualanController::class, 'show']);
+    Route::get('/{id}/edit', [PenjualanController::class, 'edit']);
+    Route::put('/{id}', [PenjualanController::class, 'update']);
+    Route::delete('/{id}', [PenjualanController::class, 'destroy']);
+});
 
 Route::group(['prefix' => 'user'], function(){
     Route::get('/', [UserController::class, 'index']);//menampilkan halaman awal user
@@ -56,6 +68,30 @@ Route::group(['prefix' => 'level'], function(){
     Route::put('/{id}',[LevelController::class, 'update']);//menyimpan perubahan data Level
     Route::delete('/{id}', [LevelController::class, 'destroy']);//menghapus data Level
 });
+
+Route::group(['prefix' => 'stok'], function () {
+    Route::get('/', [StokController::class, 'index']);
+    Route::post('/list', [StokController::class, 'list']);
+    Route::get('/create', [StokController::class, 'create']);
+    Route::post('/', [StokController::class, 'store']);
+    Route::get('/{id}', [StokController::class, 'show']);
+    Route::get('/{id}/edit', [StokController::class, 'edit']);
+    Route::put('/{id}', [StokController::class, 'update']);
+    Route::delete('/{id}', [StokController::class, 'destroy']);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get('test', function() {
     return BarangModel::with('kategori')->get();

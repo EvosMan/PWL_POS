@@ -136,7 +136,7 @@ class BarangController extends Controller
     }
     public function show(string $id)
     {
-        $barang = BarangModel::with('barang')->find($id);
+        $barang = BarangModel::find($id);
 
         $breadcrumb = (object)[
             'title' => 'Detail Barang',

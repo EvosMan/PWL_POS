@@ -33,7 +33,7 @@ class LevelController extends Controller
         // $levels = LevelModel::select('level_id', 'level_kode', 'level_nama')->with('barang');
         $levels = LevelModel::select('level_id', 'level_kode', 'level_nama');
 
-        if($request->barang_id){
+        if ($request->barang_id) {
             $levels->where('barang_id', $request->barang_id);
         }
 
@@ -69,18 +69,15 @@ class LevelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'levelname' => 'required|string|min:3|unique:m_level,levelname',
-            'nama'    => 'required|string|max:100',
-            'password' => 'required|min:5',
-            'barang_id' => 'required|integer'
+            'level_kode' => 'required|string|min:3|unique:m_level,level_kode',
+            'level_nama'     => 'required|string|max:100',
         ]);
 
         LevelModel::create([
-            'levelname' => $request->levelname,
-            'nama'     => $request->nama,
-            'password' => bcrypt($request->password), // password dienkripsi sebelum disimpan
-            'barang_id' => $request->barang_id
+            'level_kode' => $request->level_kode,
+            'level_nama'     => $request->level_nama,
         ]);
+
         return redirect('/level')->with('success', 'Data level berhasil disimpan');
     }
     public function edit(string $id)
@@ -105,19 +102,13 @@ class LevelController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            // levelname harus diisi, berupa string, minimal 3 karakter,
-            // dan bernilai unik di tabel m_level kolom levelname kecuali untuk level dengan id yang sedang diedit
-            'levelname' => 'required|string|min:3|unique:m_level,levelname,' . $id . ',level_id',
-            'nama'     => 'required|string|max:100', // nama harus diisi, berupa string, dan maksimal 100 karakter
-            'password' => 'nullable|min:5',          // password bisa diisi (minimal 5 karakter) dan bisa tidak diisi
-            'barang_id' => 'required|integer'         // barang_id harus diisi dan berupa angka
+            'level_kode' => 'required|string|min:3|unique:m_level,level_kode,' . $id . ',level_id',
+            'level_nama'     => 'required|string|max:100',
         ]);
 
         LevelModel::find($id)->update([
-            'levelname' => $request->levelname,
-            'nama'     => $request->nama,
-            'password' => $request->password ? bcrypt($request->password) : LevelModel::find($id)->password,
-            'barang_id' => $request->barang_id
+            'level_kode' => $request->level_kode,
+            'level_nama'     => $request->level_nama,
         ]);
 
         return redirect('/level')->with('success', 'Data level berhasil diubah');

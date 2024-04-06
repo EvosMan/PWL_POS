@@ -69,20 +69,18 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kategoriname' => 'required|string|min:3|unique:m_kategori,kategoriname',
-            'nama'    => 'required|string|max:100',
-            'password' => 'required|min:5',
-            'barang_id' => 'required|integer'
+            'kategori_kode' => 'required|string|min:3|unique:m_kategori,kategori_kode',
+            'kategori_nama'     => 'required|string|max:100',
         ]);
 
         KategoriModel::create([
-            'kategoriname' => $request->kategoriname,
-            'nama'     => $request->nama,
-            'password' => bcrypt($request->password), // password dienkripsi sebelum disimpan
-            'barang_id' => $request->barang_id
+            'kategori_kode' => $request->kategori_kode,
+            'kategori_nama'     => $request->kategori_nama,
         ]);
+
         return redirect('/kategori')->with('success', 'Data kategori berhasil disimpan');
     }
+
     public function edit(string $id)
     {
         $kategori = KategoriModel::find($id);
@@ -105,34 +103,29 @@ class KategoriController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            // kategoriname harus diisi, berupa string, minimal 3 karakter,
-            // dan bernilai unik di tabel m_kategori kolom kategoriname kecuali untuk kategori dengan id yang sedang diedit
-            'kategoriname' => 'required|string|min:3|unique:m_kategori,kategoriname,' . $id . ',kategori_id',
-            'nama'     => 'required|string|max:100', // nama harus diisi, berupa string, dan maksimal 100 karakter
-            'password' => 'nullable|min:5',          // password bisa diisi (minimal 5 karakter) dan bisa tidak diisi
-            'barang_id' => 'required|integer'         // barang_id harus diisi dan berupa angka
+            'kategori_kode' => 'required|string|min:3|unique:m_kategori,kategori_kode',
+            'kategori_nama'     => 'required|string|max:100',
         ]);
 
-        KategoriModel::find($id)->update([
-            'kategoriname' => $request->kategoriname,
-            'nama'     => $request->nama,
-            'password' => $request->password ? bcrypt($request->password) : KategoriModel::find($id)->password,
-            'barang_id' => $request->barang_id
+        KategoriModel::create([
+            'kategori_kode' => $request->kategori_kode,
+            'kategori_nama'     => $request->kategori_nama,
         ]);
 
-        return redirect('/kategori')->with('success', 'Data kategori berhasil diubah');
+        return redirect('/kategori')->with('success', 'Data kategori berhasil disimpan');
     }
-    public function show(string $id)
-    {
-        $kategori = KategoriModel::with('barang')->find($id);
 
-        $breadcrumb = (object)[
+    public function show($id)
+    {
+        $kategori = KategoriModel::find($id);
+
+        $breadcrumb = (object) [
             'title' => 'Detail Kategori',
-            'list' => ['Home', 'Kategori', 'Detail']
+            'list'  => ['Home', 'Kategori', 'Detail']
         ];
 
-        $page = (object)[
-            'title' => 'Detail Kategori'
+        $page = (object) [
+            'title' => 'Detail kategori'
         ];
 
         $activeMenu = 'kategori';

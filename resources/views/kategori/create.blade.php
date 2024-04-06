@@ -1,4 +1,5 @@
 @extends('layout.template')
+
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -6,47 +7,24 @@
             <div class="card-tools"></div>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ url('user') }}" class="form-horizontal">
+            <form method="POST" action="{{ url('kategori') }}" class="form-horizontal">
                 @csrf
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Level</label>
+                    <label class="col-1 control-label col-form-label">Level Kode</label>
                     <div class="col-11">
-                        <select class="form-control" id="level_id" name="level_id" required>
-                            <option value="">- Pilih Level -</option>
-                            @foreach ($level as $item)
-                                <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
-                            @endforeach
-                        </select>
-                        @error('level_id')
+                        <input type="text" class="form-control" id="kategori_kode" name="kategori_kode"
+                            value="{{ old('kategori_kode') }}" required>
+                        @error('kategori_kode')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Username</label>
+                    <label class="col-1 control-label col-form-label">Level Nama</label>
                     <div class="col-11">
-                        <input type="text" class="form-control" id="username" name="username"
-                            value="{{ old('username') }}" required>
-                        @error('username')
-                            <small class="form-text text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Nama</label>
-                    <div class="col-11">
-                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}"
-                            required>
-                        @error('nama')
-                            <small class="form-text text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Password</label>
-                    <div class="col-11">
-                        <input type="password" class="form-control" id="password" name="password" required>
-                        @error('password')
+                        <input type="text" class="form-control" id="kategori_nama" name="kategori_nama"
+                            value="{{ old('kategori_nama') }}" required>
+                        @error('kategori_nama')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -55,14 +33,16 @@
                     <label class="col-1 control-label col-form-label"></label>
                     <div class="col-11">
                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                        <a class="btn btn-sm btn-default ml-1" href="{{ url('user') }}">Kembali</a>
+                        <a class="btn btn-sm btn-default ml-1" href="{{ url('kategori') }}">Kembali</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 @endsection
+
 @push('css')
 @endpush
+
 @push('js')
 @endpush
