@@ -70,22 +70,8 @@ class UserController extends Controller
         $request->validate([
             'username' => 'required|string|min:3|unique:m_user,username',
             'nama'    => 'required|string|max:100',
-<<<<<<< HEAD
-            'passwod' => 'required|min:5',
-            'level_id'=> 'required|integer'
-        ]);
-
-        UserModel::create{[
-            'username' => $request->username,
-            'nama'     => $request->nama,
-            'password' => bcrypt($request->password),
-            'level_id' => $request->level_id
-        ]};
-        
-        return redirect('/user')-> with ('success', 'Data user berhasil disimpan');
-=======
             'password' => 'required|min:5',
-            'level_id' => 'required|integer'
+            'level_id'=> 'required|integer'
         ]);
 
         UserModel::create([
@@ -94,26 +80,8 @@ class UserController extends Controller
             'password' => bcrypt($request->password), // password dienkripsi sebelum disimpan
             'level_id' => $request->level_id
         ]);
-        return redirect('/user')->with('success', 'Data user berhasil disimpan');
-    }
-    public function edit(string $id)
-    {
-        $user = UserModel::find($id);
-        $level = LevelModel::all();
-
-        $breadcrumb = (object) [
-            'title' => 'Edit User',
-            'list'  => ['Home', 'User', 'Edit']
-        ];
-
-        $page = (object) [
-            'title' => 'Edit user'
-        ];
-
-        $activeMenu = 'user'; // set menu yang sedang aktif
-
-        return view('user.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'level' => $level, 'activeMenu' => $activeMenu]);
->>>>>>> 3caa9755b8041628e1b9d37cf55eacb7d117d52b
+        
+        return redirect('/user')-> with ('success', 'Data user berhasil disimpan');
     }
 
     public function update(Request $request, string $id)
