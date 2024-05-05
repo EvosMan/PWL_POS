@@ -9,8 +9,8 @@
         
         <div class="card-body">
         <center>Peduli dan berbaik hati siapa diaaa???.</center>   
-         <center><h1>CHRISTY.</h1></center>  
-         <center><img src="{{url('src/bahagia.jpg')}} "width="300" height="400"/center> 
+         <!-- <center><h1>CHRISTY.</h1></center>  
+         <center><img src="{{url('src/bahagia.jpg')}} "width="300" height="400"/center>  -->
          
         </div>
 

@@ -107,12 +107,12 @@ class KategoriController extends Controller
             'kategori_nama'     => 'required|string|max:100',
         ]);
 
-        KategoriModel::create([
+            KategoriModel::find($id)->update([
             'kategori_kode' => $request->kategori_kode,
             'kategori_nama'     => $request->kategori_nama,
         ]);
 
-        return redirect('/kategori')->with('success', 'Data kategori berhasil disimpan');
+        return redirect('/kategori')->with('success', 'Data kategori berhasil di ubah');
     }
 
     public function show($id)
