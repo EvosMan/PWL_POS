@@ -23,7 +23,7 @@ use App\Models\BarangModel;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'index']);
 
 Route::group(['prefix' => 'penjualan'], function () {
     Route::get('/', [PenjualanController::class, 'index']);
